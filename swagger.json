@@ -1,0 +1,4322 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/api/user": {
+      "get": {
+        "operationId": "UserController_findAll",
+        "parameters": [
+          {
+            "name": "page",
+            "required": true,
+            "in": "query",
+            "description": "Текущая страница",
+            "schema": {
+              "example": 1,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": true,
+            "in": "query",
+            "description": "Лимит элементов на странице",
+            "schema": {
+              "example": 20,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Успешное получение списка пользователей",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserPaginateResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Получение списка пользователей",
+        "tags": [
+          "Пользователи"
+        ]
+      },
+      "put": {
+        "operationId": "UserController_updateUser",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/UserUpdateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Успешное получение обновление пользователя",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserIdResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Обновление пользователя",
+        "tags": [
+          "Пользователи"
+        ]
+      },
+      "delete": {
+        "operationId": "UserController_remove",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Успешное удаление пароля пользователя",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserIdResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Удаление пользователя",
+        "tags": [
+          "Пользователи"
+        ]
+      }
+    },
+    "/api/user/profile": {
+      "get": {
+        "operationId": "UserController_findProfile",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Успешное получение данных пользователя",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Получение данных пользователя",
+        "tags": [
+          "Пользователи"
+        ]
+      }
+    },
+    "/api/user/profile/{user_id}": {
+      "get": {
+        "operationId": "UserController_findById",
+        "parameters": [
+          {
+            "name": "user_id",
+            "required": true,
+            "in": "path",
+            "description": "ID пользователя",
+            "schema": {
+              "example": 1,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Успешное получение данных пользователя",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Получение данных пользователя",
+        "tags": [
+          "Пользователи"
+        ]
+      }
+    },
+    "/api/user/message/send/{user_id}": {
+      "post": {
+        "operationId": "UserController_sendMessageUser",
+        "parameters": [
+          {
+            "name": "user_id",
+            "required": true,
+            "in": "path",
+            "description": "ID пользователя",
+            "schema": {
+              "example": 1,
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MessageUserRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Успешное отправка сообщения пользователю",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageUserResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Отправка сообщения пользователю",
+        "tags": [
+          "Пользователи"
+        ]
+      }
+    },
+    "/api/user/block/{user_id}": {
+      "post": {
+        "operationId": "UserController_mutateBlockUser",
+        "parameters": [
+          {
+            "name": "user_id",
+            "required": true,
+            "in": "path",
+            "description": "ID пользователя",
+            "schema": {
+              "example": 1,
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserBlockRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Успешное статуса блокировки пользователя",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserIdResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Изменение статуса блокировки пользователя",
+        "tags": [
+          "Пользователи"
+        ]
+      }
+    },
+    "/api/user/favorite-pond": {
+      "post": {
+        "operationId": "UserController_createFavoritePond",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PondIdRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Успешное добавление водоема в список избранных пользователя",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FavoritePondIdResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Добавить водоем в список избранных пользователя",
+        "tags": [
+          "Пользователи"
+        ]
+      }
+    },
+    "/api/user/favorite-pond/{favorite_id}": {
+      "delete": {
+        "operationId": "UserController_removeFavoritePond",
+        "parameters": [
+          {
+            "name": "favorite_id",
+            "required": true,
+            "in": "path",
+            "description": "ID водоема в спике избранных",
+            "schema": {
+              "example": 1,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Успешное добавление водоема из списка избранных пользователя",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FavoritePondIdResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Удалить водоем из списка избранных пользователя",
+        "tags": [
+          "Пользователи"
+        ]
+      }
+    },
+    "/api/auth/register": {
+      "post": {
+        "operationId": "AuthController_register",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Успешная регистрация пользователя",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserIdResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Регистрация пользователя",
+        "tags": [
+          "Аутентификация"
+        ]
+      }
+    },
+    "/api/auth/login": {
+      "post": {
+        "operationId": "AuthController_login",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Успешная аутентификация пользователя",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccessTokenResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Аутентификация пользователя",
+        "tags": [
+          "Аутентификация"
+        ]
+      }
+    },
+    "/api/auth/access-token": {
+      "post": {
+        "operationId": "AuthController_getNewTokens",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Успешное обновление access токена",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccessTokenResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Обновление access токена",
+        "tags": [
+          "Аутентификация"
+        ]
+      }
+    },
+    "/api/auth/logout": {
+      "delete": {
+        "operationId": "AuthController_logout",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Успешное разлогинивание пользователя",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Разлогинивание пользователя",
+        "tags": [
+          "Аутентификация"
+        ]
+      }
+    },
+    "/api/auth/user-verification": {
+      "post": {
+        "operationId": "AuthController_userVerification",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfirmRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Успешная подтверждение пользователя",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserIdResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Подтверждение пользователя",
+        "tags": [
+          "Аутентификация"
+        ]
+      }
+    },
+    "/api/auth/new-code": {
+      "post": {
+        "operationId": "AuthController_reqNewCode",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewCodeRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Успешная отправка нового кода",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Запросить новый код",
+        "tags": [
+          "Аутентификация"
+        ]
+      }
+    },
+    "/api/auth/recovery-password": {
+      "post": {
+        "operationId": "AuthController_recoveryPassword",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RecoveryRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Успешная отправка сообщения c кодом подтверждения",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Запрос на сброс пароля",
+        "tags": [
+          "Аутентификация"
+        ]
+      }
+    },
+    "/api/auth/reset-password": {
+      "post": {
+        "operationId": "AuthController_resetPassword",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResetPassRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Успешный сброс пароля"
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Сброс пароля",
+        "tags": [
+          "Аутентификация"
+        ]
+      }
+    },
+    "/api/auth/admin/register": {
+      "post": {
+        "operationId": "AuthAdminController_registerAdmin",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterAdminRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Успешная регистрация пользователя с правами админа",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserIdResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Регистрация пользователя с правами админа",
+        "tags": [
+          "Аутентификация админка"
+        ]
+      }
+    },
+    "/api/auth/admin/login": {
+      "post": {
+        "operationId": "AuthAdminController_login",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Успешная аутентификация пользователя",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccessTokenResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Аутентификация пользователя",
+        "tags": [
+          "Аутентификация админка"
+        ]
+      }
+    },
+    "/auth/google": {
+      "get": {
+        "operationId": "SocialMediaAuthController_googleAuth",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Аутентификация через соцсети"
+        ]
+      }
+    },
+    "/auth/google/redirect": {
+      "get": {
+        "operationId": "SocialMediaAuthController_googleAuthRedirect",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Аутентификация через соцсети"
+        ]
+      }
+    },
+    "/auth/yandex": {
+      "get": {
+        "operationId": "SocialMediaAuthController_yandexAuth",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Аутентификация через соцсети"
+        ]
+      }
+    },
+    "/auth/yandex/redirect": {
+      "get": {
+        "operationId": "SocialMediaAuthController_yandexAuthRedirect",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Аутентификация через соцсети"
+        ]
+      }
+    },
+    "/api/pond": {
+      "get": {
+        "operationId": "PondController_findAll",
+        "parameters": [
+          {
+            "name": "page",
+            "required": true,
+            "in": "query",
+            "description": "Текущая страница",
+            "schema": {
+              "example": 1,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": true,
+            "in": "query",
+            "description": "Лимит элементов на странице",
+            "schema": {
+              "example": 20,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Успешное получение списка водоемов",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PondPaginateResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Получение списка водоемов",
+        "tags": [
+          "Водоёмы"
+        ]
+      },
+      "post": {
+        "operationId": "PondController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/PondCreateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Успешное создание водоема",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PondIdResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Добавление водоема",
+        "tags": [
+          "Водоёмы"
+        ]
+      }
+    },
+    "/api/pond/{pond_id}": {
+      "get": {
+        "operationId": "PondController_findOneById",
+        "parameters": [
+          {
+            "name": "pond_id",
+            "required": true,
+            "in": "path",
+            "description": "Id  водоема",
+            "schema": {
+              "example": 1,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Успешное получение данных водоема",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PondResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Получение данных водоема",
+        "tags": [
+          "Водоёмы"
+        ]
+      },
+      "put": {
+        "operationId": "PondController_update",
+        "parameters": [
+          {
+            "name": "pond_id",
+            "required": true,
+            "in": "path",
+            "description": "Id  водоема",
+            "schema": {
+              "example": 1,
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/PondUpdateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Успешное обновление водоема",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PondIdResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Обновление водоема",
+        "tags": [
+          "Водоёмы"
+        ]
+      },
+      "delete": {
+        "operationId": "PondController_remove",
+        "parameters": [
+          {
+            "name": "pond_id",
+            "required": true,
+            "in": "path",
+            "description": "Id  водоема",
+            "schema": {
+              "example": 1,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Успешное удаление водоема",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PondIdResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Удаление водоема",
+        "tags": [
+          "Водоёмы"
+        ]
+      }
+    },
+    "/api/pond/map/{pond_id}": {
+      "get": {
+        "operationId": "PondController_getMapPond",
+        "parameters": [
+          {
+            "name": "pond_id",
+            "required": true,
+            "in": "path",
+            "description": "Id  водоема",
+            "schema": {
+              "example": 1,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Успешное получение ссылки на карту водоема",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PondLinkOnMap"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Получение ссылки на карту водоема, только с подпиской",
+        "tags": [
+          "Водоёмы"
+        ]
+      }
+    },
+    "/api/tag/user": {
+      "get": {
+        "operationId": "TagController_findAllByUserId",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Успешное получение списка меток",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TagResponseDto"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Получение списка всех меток пользователя",
+        "tags": [
+          "Метки"
+        ]
+      }
+    },
+    "/api/tag/{tag_id}": {
+      "get": {
+        "operationId": "TagController_findOneById",
+        "parameters": [
+          {
+            "name": "tag_id",
+            "required": true,
+            "in": "path",
+            "description": "Id метки",
+            "schema": {
+              "example": 1,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Успешное получение метки",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TagResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Получение метки",
+        "tags": [
+          "Метки"
+        ]
+      },
+      "put": {
+        "operationId": "TagController_update",
+        "parameters": [
+          {
+            "name": "tag_id",
+            "required": true,
+            "in": "path",
+            "description": "Id метки",
+            "schema": {
+              "example": 1,
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TagUpdateRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Успешное изменение данных метки",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TagIdResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Изменение данных метки",
+        "tags": [
+          "Метки"
+        ]
+      },
+      "delete": {
+        "operationId": "TagController_remove",
+        "parameters": [
+          {
+            "name": "tag_id",
+            "required": true,
+            "in": "path",
+            "description": "Id метки",
+            "schema": {
+              "example": 1,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Успешное удаление метки",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TagIdResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Удаление метки",
+        "tags": [
+          "Метки"
+        ]
+      }
+    },
+    "/api/tag": {
+      "post": {
+        "operationId": "TagController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TagCreateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Успешное создание метки",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TagIdResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Создание метки",
+        "tags": [
+          "Метки"
+        ]
+      }
+    },
+    "/api/report/admin": {
+      "get": {
+        "operationId": "ReportController_findAllForAdmin",
+        "parameters": [
+          {
+            "name": "page",
+            "required": true,
+            "in": "query",
+            "description": "Текущая страница",
+            "schema": {
+              "example": 1,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": true,
+            "in": "query",
+            "description": "Лимит элементов на странице",
+            "schema": {
+              "example": 20,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Успешное получение списка отчетов",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReportPaginateResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Получение списка всех отчетов",
+        "tags": [
+          "Отчеты"
+        ]
+      }
+    },
+    "/api/report/admin/{report_id}": {
+      "get": {
+        "operationId": "ReportController_findById",
+        "parameters": [
+          {
+            "name": "report_id",
+            "required": true,
+            "in": "path",
+            "description": "Id отчета",
+            "schema": {
+              "example": 1,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Успешное получение отчета по айди",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReportResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Получение отчета по айди",
+        "tags": [
+          "Отчеты"
+        ]
+      }
+    },
+    "/api/report": {
+      "get": {
+        "operationId": "ReportController_findAll",
+        "parameters": [
+          {
+            "name": "page",
+            "required": true,
+            "in": "query",
+            "description": "Текущая страница",
+            "schema": {
+              "example": 1,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": true,
+            "in": "query",
+            "description": "Лимит элементов на странице",
+            "schema": {
+              "example": 20,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Успешное получение списка валидных отчетов",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReportPaginateResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Получение списка всех валидных отчетов",
+        "tags": [
+          "Отчеты"
+        ]
+      },
+      "post": {
+        "operationId": "ReportController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/ReportCreateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Успешное создание отчета",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReportIdResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Создание отчета",
+        "tags": [
+          "Отчеты"
+        ]
+      }
+    },
+    "/api/report/invalid": {
+      "get": {
+        "operationId": "ReportController_findInvalid",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Успешное получение списка невалидных отчетов",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ReportResponseDto"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Получение списка всех невалидных отчетов",
+        "tags": [
+          "Отчеты"
+        ]
+      }
+    },
+    "/api/report/slug/{slug}": {
+      "get": {
+        "operationId": "ReportController_findBySlug",
+        "parameters": [
+          {
+            "name": "slug",
+            "required": true,
+            "in": "path",
+            "description": "Слаг для отображения отчета",
+            "schema": {
+              "example": "12-FEEDER-какой-то-текст-пару-слов",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Успешное получение отчета",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReportResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Получение отчета",
+        "tags": [
+          "Отчеты"
+        ]
+      }
+    },
+    "/api/report/ref/{id}": {
+      "get": {
+        "operationId": "ReportController_findByRefId",
+        "parameters": [
+          {
+            "name": "type",
+            "required": true,
+            "in": "query",
+            "description": "тип Id",
+            "schema": {
+              "example": "user_id",
+              "type": "string",
+              "enum": [
+                "user_id",
+                "pond_id",
+                "tag_id"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Успешное получение списка отчетов",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReportPaginateResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Получение списка всех отчетов по привязке(водоем, пользователь или метка), только валидные",
+        "tags": [
+          "Отчеты"
+        ]
+      }
+    },
+    "/api/report/{report_id}": {
+      "put": {
+        "operationId": "ReportController_update",
+        "parameters": [
+          {
+            "name": "report_id",
+            "required": true,
+            "in": "path",
+            "description": "Id отчета",
+            "schema": {
+              "example": 1,
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/ReportUpdateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Успешное обновление отчета",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReportIdResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Обновление отчета",
+        "tags": [
+          "Отчеты"
+        ]
+      },
+      "delete": {
+        "operationId": "ReportController_remove",
+        "parameters": [
+          {
+            "name": "report_id",
+            "required": true,
+            "in": "path",
+            "description": "Id отчета",
+            "schema": {
+              "example": 1,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Успешное удаление отчета",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReportIdResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Удаление отчета",
+        "tags": [
+          "Отчеты"
+        ]
+      }
+    },
+    "/api/report/validate/{report_id}": {
+      "put": {
+        "operationId": "ReportController_updateValid",
+        "parameters": [
+          {
+            "name": "report_id",
+            "required": true,
+            "in": "path",
+            "description": "Id отчета",
+            "schema": {
+              "example": 1,
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReportValidateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Успешное обновление отчета",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReportIdResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Изменение валидности отчета",
+        "tags": [
+          "Отчеты"
+        ]
+      }
+    },
+    "/api/reaction/{report_id}": {
+      "post": {
+        "operationId": "ReactionController_createReaction",
+        "parameters": [
+          {
+            "name": "report_id",
+            "required": true,
+            "in": "path",
+            "description": "Id отчета",
+            "schema": {
+              "example": 1,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Успешное добавление реакции",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReactionIdResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Добавление реакции на отчет",
+        "tags": [
+          "Реакции на отчеты"
+        ]
+      },
+      "delete": {
+        "operationId": "ReactionController_removeReaction",
+        "parameters": [
+          {
+            "name": "report_id",
+            "required": true,
+            "in": "path",
+            "description": "Id отчета",
+            "schema": {
+              "example": 1,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Успешное удаление реакции",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReactionIdResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Удаление реакции на отчет",
+        "tags": [
+          "Реакции на отчеты"
+        ]
+      }
+    },
+    "/api/tariff-plan": {
+      "get": {
+        "operationId": "TariffPlanController_findAll",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TariffPlanResponseDto"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Получение списка тарифных планов для пользователей",
+        "tags": [
+          "Тарифный план"
+        ]
+      },
+      "post": {
+        "operationId": "TariffPlanController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TariffPlanCreateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TariffIdResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Создание тарифного плана",
+        "tags": [
+          "Тарифный план"
+        ]
+      }
+    },
+    "/api/tariff-plan/admin": {
+      "get": {
+        "operationId": "TariffPlanController_findAllForAdmin",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TariffPlanResponseDto"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Получение списка тарифных планов для админов",
+        "tags": [
+          "Тарифный план"
+        ]
+      }
+    },
+    "/api/tariff-plan/{tariff_id}": {
+      "get": {
+        "operationId": "TariffPlanController_findById",
+        "parameters": [
+          {
+            "name": "tariff_id",
+            "required": true,
+            "in": "path",
+            "description": "ID тарифа",
+            "schema": {
+              "example": 1,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TariffPlanResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Получение тарифного плана",
+        "tags": [
+          "Тарифный план"
+        ]
+      },
+      "put": {
+        "operationId": "TariffPlanController_update",
+        "parameters": [
+          {
+            "name": "tariff_id",
+            "required": true,
+            "in": "path",
+            "description": "ID тарифа",
+            "schema": {
+              "example": 1,
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TariffPlanUpdateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TariffIdResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Редактирование тарифного плана",
+        "tags": [
+          "Тарифный план"
+        ]
+      },
+      "delete": {
+        "operationId": "TariffPlanController_remove",
+        "parameters": [
+          {
+            "name": "tariff_id",
+            "required": true,
+            "in": "path",
+            "description": "ID тарифа",
+            "schema": {
+              "example": 1,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TariffIdResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Удаление тарифного плана",
+        "tags": [
+          "Тарифный план"
+        ]
+      }
+    },
+    "/api/tariff-pond": {
+      "get": {
+        "operationId": "TariffPondController_findAll",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TariffPondResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Получение списка тарифных планов карт для пользователей",
+        "tags": [
+          "Тариф на водоем"
+        ]
+      },
+      "post": {
+        "operationId": "TariffPondController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TariffPondCreateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TariffIdResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Создание тарифного плана",
+        "tags": [
+          "Тариф на водоем"
+        ]
+      }
+    },
+    "/api/tariff-pond/admin": {
+      "get": {
+        "operationId": "TariffPondController_findAllForAdmin",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TariffPondResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Получение списка тарифных планов карт для админа",
+        "tags": [
+          "Тариф на водоем"
+        ]
+      }
+    },
+    "/api/tariff-pond/{tariff_id}": {
+      "get": {
+        "operationId": "TariffPondController_findById",
+        "parameters": [
+          {
+            "name": "tariff_id",
+            "required": true,
+            "in": "path",
+            "description": "ID тарифа",
+            "schema": {
+              "example": 1,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TariffPondResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Получение тарифного плана",
+        "tags": [
+          "Тариф на водоем"
+        ]
+      },
+      "put": {
+        "operationId": "TariffPondController_update",
+        "parameters": [
+          {
+            "name": "tariff_id",
+            "required": true,
+            "in": "path",
+            "description": "ID тарифа",
+            "schema": {
+              "example": 1,
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TariffPondUpdateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TariffIdResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Редактирование тарифного плана",
+        "tags": [
+          "Тариф на водоем"
+        ]
+      },
+      "delete": {
+        "operationId": "TariffPondController_remove",
+        "parameters": [
+          {
+            "name": "tariff_id",
+            "required": true,
+            "in": "path",
+            "description": "ID тарифа",
+            "schema": {
+              "example": 1,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TariffIdResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Удаление тарифного плана",
+        "tags": [
+          "Тариф на водоем"
+        ]
+      }
+    },
+    "/api/purchased-pond": {
+      "get": {
+        "operationId": "PurchasedPondController_findOneByUserId",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PurchasedPondResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Получение инфы о купленных озерах",
+        "tags": [
+          "Купленные карты водоемы"
+        ]
+      },
+      "post": {
+        "operationId": "PurchasedPondController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PurchasedPondCreateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PurchasedPondResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Покупка карты водоема",
+        "tags": [
+          "Купленные карты водоемы"
+        ]
+      }
+    },
+    "/api/purchased-pond/{id}": {
+      "delete": {
+        "operationId": "PurchasedPondController_remove",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "ID купленной карты водоема",
+            "schema": {
+              "example": 1,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PurchasedPondResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Удалить купленную карту водоема",
+        "tags": [
+          "Купленные карты водоемы"
+        ]
+      }
+    },
+    "/api/subscribe": {
+      "get": {
+        "operationId": "SubscribeController_findOneByUserId",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubscribeResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Получение инфы о подписке",
+        "tags": [
+          "Подписка пользователя"
+        ]
+      },
+      "post": {
+        "operationId": "SubscribeController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubscribeCreateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubscribeIdResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Создание подписки для юзеров",
+        "tags": [
+          "Подписка пользователя"
+        ]
+      }
+    },
+    "/api/subscribe/{user_id}": {
+      "get": {
+        "operationId": "SubscribeController_findOneByUserIdAdmin",
+        "parameters": [
+          {
+            "name": "user_id",
+            "required": true,
+            "in": "path",
+            "description": "ID пользователя",
+            "schema": {
+              "example": 1,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubscribeResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Получение инфы о подписке для админов",
+        "tags": [
+          "Подписка пользователя"
+        ]
+      }
+    },
+    "/api/subscribe/admin": {
+      "post": {
+        "operationId": "SubscribeController_createForAdmin",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubscribeCreateAdminRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubscribeIdResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Создание подписки для админов, включая приватные тарифы",
+        "tags": [
+          "Подписка пользователя"
+        ]
+      }
+    },
+    "/api/subscribe/{subscribe_id}": {
+      "delete": {
+        "operationId": "SubscribeController_remove",
+        "parameters": [
+          {
+            "name": "subscribe_id",
+            "required": true,
+            "in": "path",
+            "description": "ID подписки",
+            "schema": {
+              "example": 1,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubscribeIdResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Удаление подписки",
+        "tags": [
+          "Подписка пользователя"
+        ]
+      }
+    },
+    "/api/comment/{report_id}": {
+      "get": {
+        "operationId": "CommentController_findAllToReport",
+        "parameters": [
+          {
+            "name": "report_id",
+            "required": true,
+            "in": "path",
+            "description": "Id отчета",
+            "schema": {
+              "example": 1,
+              "type": "number"
+            }
+          },
+          {
+            "name": "page",
+            "required": true,
+            "in": "query",
+            "description": "Текущая страница",
+            "schema": {
+              "example": 1,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": true,
+            "in": "query",
+            "description": "Лимит элементов на странице",
+            "schema": {
+              "example": 20,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Успешное получение списка комментариев к отчету",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommentPaginateResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Получение списка комментариев к отчету",
+        "tags": [
+          "Комментарии"
+        ]
+      }
+    },
+    "/api/comment": {
+      "post": {
+        "operationId": "CommentController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommentCreateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Успешное создание комментария",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommentIdResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Создание комментария",
+        "tags": [
+          "Комментарии"
+        ]
+      }
+    },
+    "/api/comment/{comment_id}": {
+      "put": {
+        "operationId": "CommentController_update",
+        "parameters": [
+          {
+            "name": "comment_id",
+            "required": true,
+            "in": "path",
+            "description": "Id комментария",
+            "schema": {
+              "example": 1,
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommentUpdateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Успешное обновление комментария",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommentIdResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Обновление комментария",
+        "tags": [
+          "Комментарии"
+        ]
+      },
+      "delete": {
+        "operationId": "CommentController_remove",
+        "parameters": [
+          {
+            "name": "comment_id",
+            "required": true,
+            "in": "path",
+            "description": "Id комментария",
+            "schema": {
+              "example": 1,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Успешное удаление комментария",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommentIdResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Удаление комментария",
+        "tags": [
+          "Комментарии"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "Fish Place",
+    "description": "Документация REST API для приложения Рыбное место (Fish Place)",
+    "version": "1.0.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "cookie": {
+        "type": "apiKey",
+        "in": "cookie",
+        "name": "connect.sid"
+      },
+      "bearer": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http"
+      }
+    },
+    "schemas": {
+      "FavoritePondResponse": {
+        "type": "object",
+        "properties": {
+          "favorite_id": {
+            "type": "number",
+            "example": 1,
+            "description": "ID водоёма в списке избранных"
+          },
+          "pond_id": {
+            "type": "number",
+            "example": 1,
+            "description": "ID водоёма"
+          }
+        },
+        "required": [
+          "favorite_id",
+          "pond_id"
+        ]
+      },
+      "UserResponseDto": {
+        "type": "object",
+        "properties": {
+          "user_id": {
+            "type": "number",
+            "example": 1,
+            "description": "ID пользователя"
+          },
+          "email": {
+            "type": "string",
+            "example": "user@mail.ru",
+            "description": "Почтовый адрес"
+          },
+          "password": {
+            "type": "string",
+            "example": "123456789",
+            "description": "Пароль пользователя"
+          },
+          "role": {
+            "type": "string",
+            "example": [
+              "FP/DEVELOPER"
+            ],
+            "description": "Роль",
+            "enum": [
+              "FP/ADMIN",
+              "FP/DEVELOPER",
+              "FP/MANAGER",
+              "STORE/ADMIN",
+              "STORE/MANAGER",
+              "USER"
+            ]
+          },
+          "fname": {
+            "type": "string",
+            "example": "Шавлинский",
+            "description": "Фамилия пользователя"
+          },
+          "name": {
+            "type": "string",
+            "example": "Роман",
+            "description": "Имя пользователя"
+          },
+          "lname": {
+            "type": "string",
+            "example": "Игоревич",
+            "description": "Отчество пользователя"
+          },
+          "birthday": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2021-07-06",
+            "description": "Дата рождения пользователя"
+          },
+          "avatar": {
+            "type": "string",
+            "example": "",
+            "description": "Аватар пользователя"
+          },
+          "blocked": {
+            "type": "object",
+            "example": {
+              "block_id": 1,
+              "id": 1
+            },
+            "description": "Заблокирован ли пользователь"
+          },
+          "verificationToken": {
+            "type": "string",
+            "example": "токен",
+            "description": "Верефицирован ли пользователь"
+          },
+          "favorites_pond": {
+            "description": "Список избранных водоёмов",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FavoritePondResponse"
+            }
+          }
+        },
+        "required": [
+          "user_id",
+          "email",
+          "password",
+          "role",
+          "fname",
+          "name",
+          "lname",
+          "birthday",
+          "avatar",
+          "blocked",
+          "verificationToken",
+          "favorites_pond"
+        ]
+      },
+      "UserPaginateResponse": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "number",
+            "example": 100,
+            "description": "Общее количество элементов"
+          },
+          "list": {
+            "description": "Список элементов",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserResponseDto"
+            }
+          }
+        },
+        "required": [
+          "total",
+          "list"
+        ]
+      },
+      "ErrorField": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Invalid message",
+            "description": "Сообщение ошибки"
+          },
+          "pattern": {
+            "type": "string",
+            "example": "auth.login",
+            "description": "Если ошибка в микросервисе, то его паттерн"
+          },
+          "path": {
+            "type": "string",
+            "example": "/auth/login",
+            "description": "Путь запроса"
+          },
+          "ms_name": {
+            "type": "string",
+            "example": "AUTH MS",
+            "description": "Название микросервиса"
+          },
+          "timestamp": {
+            "type": "string",
+            "example": "18/10/2024 18:40",
+            "description": "Временная метка"
+          }
+        },
+        "required": [
+          "message",
+          "pattern",
+          "path",
+          "ms_name",
+          "timestamp"
+        ]
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "description": "Общее поле ошибки",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ErrorField"
+              }
+            ]
+          }
+        },
+        "required": [
+          "error"
+        ]
+      },
+      "MessageUserRequest": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "example": "Шавлинский",
+            "description": "Фамилия пользователя"
+          }
+        },
+        "required": [
+          "text"
+        ]
+      },
+      "MessageUserResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "boolean",
+            "example": true,
+            "description": "Статус отправки"
+          },
+          "info": {
+            "type": "string",
+            "example": "Сообщение успешно отправлено",
+            "description": "Информация об отправке сообщения пользователю"
+          }
+        },
+        "required": [
+          "status",
+          "info"
+        ]
+      },
+      "UserUpdateRequest": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "user@mail.ru",
+            "description": "Почтовый адрес"
+          },
+          "phone": {
+            "type": "string",
+            "example": "+375291231212",
+            "description": "Телефон"
+          },
+          "user_name": {
+            "type": "string",
+            "example": "u1234",
+            "description": "Ник пользователя"
+          },
+          "fname": {
+            "type": "string",
+            "example": "Шавлинский",
+            "description": "Фамилия пользователя"
+          },
+          "name": {
+            "type": "string",
+            "example": "Роман",
+            "description": "Имя пользователя"
+          },
+          "birthday": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2021-07-06",
+            "description": "Дата рождения пользователя"
+          },
+          "avatar": {
+            "type": "string",
+            "format": "binary",
+            "description": "Аватар пользователя"
+          }
+        },
+        "required": [
+          "email",
+          "phone",
+          "user_name",
+          "fname",
+          "name",
+          "birthday"
+        ]
+      },
+      "UserIdResponse": {
+        "type": "object",
+        "properties": {
+          "user_id": {
+            "type": "number",
+            "example": 1,
+            "description": "ID пользователя"
+          }
+        },
+        "required": [
+          "user_id"
+        ]
+      },
+      "UserBlockRequest": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "example": "BLOCK",
+            "description": "Действие для блокировки/разблокировки",
+            "enum": [
+              "BLOCK",
+              "UNBLOCK"
+            ]
+          }
+        },
+        "required": [
+          "action"
+        ]
+      },
+      "PondIdRequest": {
+        "type": "object",
+        "properties": {
+          "pond_id": {
+            "type": "number",
+            "example": 1,
+            "description": "Id  водоема"
+          }
+        },
+        "required": [
+          "pond_id"
+        ]
+      },
+      "FavoritePondIdResponse": {
+        "type": "object",
+        "properties": {
+          "favorite_id": {
+            "type": "number",
+            "example": 1,
+            "description": "ID водоема в спике избранных"
+          }
+        },
+        "required": [
+          "favorite_id"
+        ]
+      },
+      "RegisterRequest": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "user@mail.ru",
+            "description": "Почтовый адрес"
+          },
+          "phone": {
+            "type": "string",
+            "example": "+375291231212",
+            "description": "Телефон"
+          },
+          "password": {
+            "type": "string",
+            "example": "123456789",
+            "description": "Пароль сотрудника"
+          }
+        },
+        "required": [
+          "password"
+        ]
+      },
+      "LoginRequest": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "user@mail.ru",
+            "description": "Почтовый адрес"
+          },
+          "phone": {
+            "type": "string",
+            "example": "+375291231212",
+            "description": "Телефон"
+          },
+          "password": {
+            "type": "string",
+            "example": "123456789",
+            "description": "Пароль сотрудника"
+          },
+          "is_admin": {
+            "type": "boolean",
+            "example": true,
+            "description": "При добавлении этого поля, вход будет происходить в админку"
+          }
+        },
+        "required": [
+          "password"
+        ]
+      },
+      "AccessTokenResponse": {
+        "type": "object",
+        "properties": {
+          "accessToken": {
+            "type": "string",
+            "example": "token",
+            "description": "Access token"
+          }
+        },
+        "required": [
+          "accessToken"
+        ]
+      },
+      "ConfirmRequest": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "example": "111111",
+            "description": "Код подтверждения"
+          }
+        },
+        "required": [
+          "code"
+        ]
+      },
+      "NewCodeRequest": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "user@mail.ru",
+            "description": "Почтовый адрес"
+          },
+          "phone": {
+            "type": "string",
+            "example": "+375291231212",
+            "description": "Телефон"
+          },
+          "type": {
+            "type": "string",
+            "example": "VERIFICATION",
+            "description": "Тип кода",
+            "enum": [
+              "VERIFICATION",
+              "PASSWORD_RESET"
+            ]
+          }
+        },
+        "required": [
+          "email",
+          "phone",
+          "type"
+        ]
+      },
+      "RecoveryRequest": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "user@mail.ru",
+            "description": "Почтовый адрес"
+          },
+          "phone": {
+            "type": "string",
+            "example": "+375291234567",
+            "description": "Телефон"
+          }
+        },
+        "required": [
+          "email",
+          "phone"
+        ]
+      },
+      "ResetPassRequest": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "example": "111111",
+            "description": "Код подтверждения"
+          },
+          "password": {
+            "type": "string",
+            "example": "123456789",
+            "description": "Пароль сотрудника"
+          }
+        },
+        "required": [
+          "code",
+          "password"
+        ]
+      },
+      "RegisterAdminRequest": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "user@mail.ru",
+            "description": "Почтовый адрес"
+          },
+          "phone": {
+            "type": "string",
+            "example": "+375291231212",
+            "description": "Телефон"
+          },
+          "password": {
+            "type": "string",
+            "example": "123456789",
+            "description": "Пароль сотрудника"
+          },
+          "role": {
+            "type": "array",
+            "example": [
+              "FP/DEVELOPER"
+            ],
+            "description": "Роль",
+            "items": {
+              "type": "string",
+              "enum": [
+                "FP/ADMIN",
+                "FP/DEVELOPER",
+                "FP/MANAGER",
+                "STORE/ADMIN",
+                "STORE/MANAGER",
+                "USER"
+              ]
+            }
+          }
+        },
+        "required": [
+          "password"
+        ]
+      },
+      "PondResponseDto": {
+        "type": "object",
+        "properties": {
+          "pond_id": {
+            "type": "number",
+            "example": 1,
+            "description": "pond_id"
+          },
+          "name": {
+            "type": "string",
+            "example": "Вилейское водохранилище",
+            "description": "Название водоема"
+          },
+          "coordinate": {
+            "type": "string",
+            "example": "54.484138, 27.106376",
+            "description": "Координаты центра водоема"
+          }
+        },
+        "required": [
+          "pond_id",
+          "name",
+          "coordinate"
+        ]
+      },
+      "PondPaginateResponse": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "number",
+            "example": 100,
+            "description": "Общее количество элементов"
+          },
+          "list": {
+            "description": "Список элементов",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PondResponseDto"
+            }
+          }
+        },
+        "required": [
+          "total",
+          "list"
+        ]
+      },
+      "PondLinkOnMap": {
+        "type": "object",
+        "properties": {
+          "geoFile": {
+            "type": "string",
+            "example": "ссылка на файл",
+            "description": "ссылка на файл geojson"
+          }
+        },
+        "required": [
+          "geoFile"
+        ]
+      },
+      "PondCreateRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Вилейское водохранилище",
+            "description": "Название водоема"
+          },
+          "coordinate": {
+            "type": "string",
+            "example": "54.484138, 27.106376",
+            "description": "Координаты центра водоема"
+          },
+          "geoFile": {
+            "type": "string",
+            "description": "ссылка на файл geojson"
+          },
+          "type": {
+            "type": "string",
+            "example": "LAKE",
+            "enum": [
+              "RESERVOIR",
+              "RIVER",
+              "LAKE"
+            ],
+            "description": "Тип водоема"
+          }
+        },
+        "required": [
+          "name",
+          "coordinate",
+          "type"
+        ]
+      },
+      "PondIdResponseDto": {
+        "type": "object",
+        "properties": {
+          "pond_id": {
+            "type": "number",
+            "example": 1,
+            "description": "pond_id"
+          }
+        },
+        "required": [
+          "pond_id"
+        ]
+      },
+      "PondUpdateRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Вилейское водохранилище",
+            "description": "Название водоема"
+          },
+          "coordinate": {
+            "type": "string",
+            "example": "54.484138, 27.106376",
+            "description": "Координаты центра водоема"
+          },
+          "type": {
+            "type": "string",
+            "example": "LAKE",
+            "enum": [
+              "RESERVOIR",
+              "RIVER",
+              "LAKE"
+            ],
+            "description": "Тип водоема"
+          },
+          "geoFile": {
+            "type": "string",
+            "format": "binary",
+            "description": "ссылка на файл geojson"
+          }
+        }
+      },
+      "TagResponseDto": {
+        "type": "object",
+        "properties": {
+          "tag_id": {
+            "type": "number",
+            "example": 1,
+            "description": "Id метки"
+          },
+          "user_id": {
+            "type": "number",
+            "example": 1,
+            "description": "Id пользователя"
+          },
+          "name": {
+            "type": "string",
+            "example": "Отличное место",
+            "description": "Название метки"
+          },
+          "coordinate": {
+            "type": "string",
+            "example": "54.484138, 27.106376",
+            "description": "Координаты метки"
+          },
+          "color": {
+            "type": "string",
+            "example": "#dd4419",
+            "description": "Цвет метки"
+          },
+          "comment": {
+            "type": "string",
+            "example": "Тут поймал самую большую рыбу",
+            "description": "Доп комментарий"
+          }
+        },
+        "required": [
+          "tag_id",
+          "user_id",
+          "name",
+          "coordinate",
+          "color",
+          "comment"
+        ]
+      },
+      "TagCreateRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Отличное место",
+            "description": "Название метки"
+          },
+          "coordinate": {
+            "type": "string",
+            "example": "54.484138, 27.106376",
+            "description": "Координаты метки"
+          },
+          "color": {
+            "type": "string",
+            "example": "#dd4419",
+            "description": "Цвет метки"
+          },
+          "comment": {
+            "type": "string",
+            "example": "Тут поймал самую большую рыбу",
+            "description": "Доп комментарий"
+          }
+        },
+        "required": [
+          "name",
+          "coordinate",
+          "color"
+        ]
+      },
+      "TagIdResponse": {
+        "type": "object",
+        "properties": {
+          "tag_id": {
+            "type": "number",
+            "example": 1,
+            "description": "Id метки"
+          }
+        },
+        "required": [
+          "tag_id"
+        ]
+      },
+      "TagUpdateRequestDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Отличное место",
+            "description": "Название метки"
+          },
+          "coordinate": {
+            "type": "string",
+            "example": "54.484138, 27.106376",
+            "description": "Координаты метки"
+          },
+          "color": {
+            "type": "string",
+            "example": "#dd4419",
+            "description": "Цвет метки"
+          },
+          "comment": {
+            "type": "string",
+            "example": "Тут поймал самую большую рыбу",
+            "description": "Доп комментарий"
+          }
+        }
+      },
+      "ReportResponseDto": {
+        "type": "object",
+        "properties": {
+          "report_id": {
+            "type": "number",
+            "example": 1,
+            "description": "Id метки"
+          },
+          "user_id": {
+            "type": "number",
+            "example": 1,
+            "description": "Id пользователя"
+          },
+          "pond_id": {
+            "type": "number",
+            "example": 1,
+            "description": "Id водоема, если отчет создается только на водоем"
+          },
+          "tag_id": {
+            "type": "number",
+            "example": 1,
+            "description": "Id метки, если отчет привязывается к метке"
+          },
+          "text": {
+            "type": "string",
+            "example": "Супер классное место",
+            "description": "Описание"
+          },
+          "date": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2021-07-06",
+            "description": "Дата рыбалки"
+          },
+          "photos": {
+            "example": [],
+            "description": "Массив фотографий",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "type_fishing": {
+            "type": "string",
+            "example": "FEEDER",
+            "enum": [
+              "FLOAT",
+              "FEEDER",
+              "SPINNING",
+              "WINTER_FISHING",
+              "SPEAR_FISHING"
+            ],
+            "description": "Тип рыбалки"
+          },
+          "is_valid": {
+            "type": "boolean",
+            "example": false,
+            "description": "Проверен ли отчет"
+          },
+          "slug": {
+            "type": "string",
+            "example": "12-FEEDER-какой-то-текст-пару-слов",
+            "description": "Слаг для отображения отчета"
+          },
+          "reactions": {
+            "type": "number",
+            "example": 1,
+            "description": "Количество реакция"
+          }
+        },
+        "required": [
+          "report_id",
+          "user_id",
+          "pond_id",
+          "tag_id",
+          "text",
+          "date",
+          "photos",
+          "type_fishing",
+          "is_valid",
+          "slug",
+          "reactions"
+        ]
+      },
+      "ReportPaginateResponse": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "number",
+            "example": 100,
+            "description": "Общее количество элементов"
+          },
+          "list": {
+            "description": "Список элементов",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReportResponseDto"
+            }
+          }
+        },
+        "required": [
+          "total",
+          "list"
+        ]
+      },
+      "ReportCreateRequest": {
+        "type": "object",
+        "properties": {
+          "pond_id": {
+            "type": "number",
+            "example": 1,
+            "description": "Id водоема"
+          },
+          "tag_id": {
+            "type": "number",
+            "example": 1,
+            "description": "Id метки"
+          },
+          "text": {
+            "type": "string",
+            "example": "Отличное место",
+            "description": "Описание"
+          },
+          "date": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2021-07-06",
+            "description": "Дата рыбалки"
+          },
+          "photos": {
+            "type": "string",
+            "format": "binary",
+            "description": "Фотки отчета"
+          },
+          "type_fishing": {
+            "type": "object",
+            "example": "FEEDER",
+            "description": "Тип ловли"
+          }
+        },
+        "required": [
+          "pond_id",
+          "text",
+          "type_fishing"
+        ]
+      },
+      "ReportIdResponseDto": {
+        "type": "object",
+        "properties": {
+          "report_id": {
+            "type": "number",
+            "example": 1,
+            "description": "Id метки"
+          }
+        },
+        "required": [
+          "report_id"
+        ]
+      },
+      "ReportUpdateRequest": {
+        "type": "object",
+        "properties": {
+          "tag_id": {
+            "type": "number",
+            "example": 1,
+            "description": "Id метки"
+          },
+          "text": {
+            "type": "string",
+            "example": "Отличное место",
+            "description": "Описание"
+          },
+          "date": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2021-07-06",
+            "description": "Дата рождения пользователя"
+          },
+          "photos": {
+            "type": "string",
+            "format": "binary",
+            "description": "Фотки отчета"
+          },
+          "type_fishing": {
+            "type": "object",
+            "example": "FEEDER",
+            "description": "Тип ловли"
+          },
+          "old_photos": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "1.jpg",
+              "2.jpg"
+            ],
+            "description": "Названия файлов отчета, которые нужно удалить"
+          }
+        }
+      },
+      "ReportValidateRequest": {
+        "type": "object",
+        "properties": {
+          "is_valid": {
+            "type": "boolean",
+            "example": true,
+            "description": "Значение валидности отчета"
+          }
+        },
+        "required": [
+          "is_valid"
+        ]
+      },
+      "ReactionIdResponseDto": {
+        "type": "object",
+        "properties": {
+          "reaction_id": {
+            "type": "number",
+            "example": 1,
+            "description": "Id реакции"
+          }
+        },
+        "required": [
+          "reaction_id"
+        ]
+      },
+      "TariffPlanResponseDto": {
+        "type": "object",
+        "properties": {
+          "tariff_id": {
+            "type": "number",
+            "example": 1,
+            "description": "ID тарифного плана"
+          },
+          "name": {
+            "type": "string",
+            "example": "Тариф на 3 месяца",
+            "description": "Название тарифного плана"
+          },
+          "time_period": {
+            "type": "string",
+            "example": "THREE_MONTHS",
+            "description": "Вариант временного периода",
+            "enum": [
+              "THREE_MONTHS",
+              "HALF_A_YEAR",
+              "YEAR",
+              "UNLIMITED"
+            ]
+          },
+          "price": {
+            "type": "number",
+            "example": 4.99,
+            "description": "Цена тарифного плана"
+          },
+          "is_private": {
+            "type": "boolean",
+            "example": false,
+            "description": "Приватный тариф или нет"
+          }
+        },
+        "required": [
+          "tariff_id",
+          "name",
+          "time_period",
+          "price",
+          "is_private"
+        ]
+      },
+      "TariffPlanCreateRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Тариф на 3 месяца",
+            "description": "Название тарифного плана"
+          },
+          "time_period": {
+            "type": "string",
+            "example": "THREE_MONTHS",
+            "description": "Вариант временного периода",
+            "enum": [
+              "THREE_MONTHS",
+              "HALF_A_YEAR",
+              "YEAR",
+              "UNLIMITED"
+            ]
+          },
+          "price": {
+            "type": "number",
+            "example": 4.99,
+            "description": "Цена тарифного плана"
+          },
+          "is_private": {
+            "type": "boolean",
+            "example": false,
+            "description": "Приватный тариф или нет"
+          }
+        },
+        "required": [
+          "name",
+          "time_period",
+          "price",
+          "is_private"
+        ]
+      },
+      "TariffIdResponse": {
+        "type": "object",
+        "properties": {
+          "tariff_id": {
+            "type": "number",
+            "example": 1,
+            "description": "ID тарифа"
+          }
+        },
+        "required": [
+          "tariff_id"
+        ]
+      },
+      "TariffPlanUpdateRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Тариф на 3 месяца",
+            "description": "Название тарифного плана"
+          },
+          "time_period": {
+            "type": "string",
+            "example": "THREE_MONTHS",
+            "description": "Вариант временного периода",
+            "enum": [
+              "THREE_MONTHS",
+              "HALF_A_YEAR",
+              "YEAR",
+              "UNLIMITED"
+            ]
+          },
+          "price": {
+            "type": "number",
+            "example": 4.99,
+            "description": "Цена тарифного плана"
+          },
+          "is_private": {
+            "type": "boolean",
+            "example": false,
+            "description": "Приватный тариф или нет"
+          }
+        }
+      },
+      "TariffPondResponse": {
+        "type": "object",
+        "properties": {
+          "tariff_id": {
+            "type": "number",
+            "example": 1,
+            "description": "ID тарифного плана"
+          },
+          "pond_id": {
+            "type": "number",
+            "example": 1,
+            "description": "ID водоема"
+          },
+          "price": {
+            "type": "number",
+            "example": 4.99,
+            "description": "Цена тарифного плана"
+          },
+          "is_private": {
+            "type": "boolean",
+            "example": false,
+            "description": "Приватный тариф или нет"
+          }
+        },
+        "required": [
+          "tariff_id",
+          "pond_id",
+          "price",
+          "is_private"
+        ]
+      },
+      "TariffPondCreateRequest": {
+        "type": "object",
+        "properties": {
+          "pond_id": {
+            "type": "number",
+            "example": 1,
+            "description": "ID водоема"
+          },
+          "price": {
+            "type": "number",
+            "example": 4.99,
+            "description": "Цена тарифного плана"
+          },
+          "is_private": {
+            "type": "boolean",
+            "example": false,
+            "description": "Приватный тариф или нет"
+          }
+        },
+        "required": [
+          "pond_id",
+          "price",
+          "is_private"
+        ]
+      },
+      "TariffPondUpdateRequest": {
+        "type": "object",
+        "properties": {
+          "pond_id": {
+            "type": "number",
+            "example": 1,
+            "description": "ID водоема"
+          },
+          "price": {
+            "type": "number",
+            "example": 4.99,
+            "description": "Цена тарифного плана"
+          },
+          "is_private": {
+            "type": "boolean",
+            "example": false,
+            "description": "Приватный тариф или нет"
+          }
+        }
+      },
+      "PurchasedPondResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 1,
+            "description": "Id покупки"
+          },
+          "tariff_id": {
+            "type": "number",
+            "example": 1,
+            "description": "Id тарифа по которому купили карту водоема"
+          },
+          "user_id": {
+            "type": "number",
+            "example": 1,
+            "description": "Id пользователя"
+          }
+        },
+        "required": [
+          "id",
+          "tariff_id",
+          "user_id"
+        ]
+      },
+      "PurchasedPondCreateRequest": {
+        "type": "object",
+        "properties": {
+          "tariff_id": {
+            "type": "number",
+            "example": 1,
+            "description": "ID тарифа по которому купили карту"
+          }
+        },
+        "required": [
+          "tariff_id"
+        ]
+      },
+      "SubscribeResponse": {
+        "type": "object",
+        "properties": {
+          "subscribe_id": {
+            "type": "number",
+            "example": 1,
+            "description": "ID подписки"
+          },
+          "tariff_id": {
+            "type": "number",
+            "example": 1,
+            "description": "ID тарифа"
+          },
+          "user_id": {
+            "type": "number",
+            "example": 1,
+            "description": "ID пользователя"
+          },
+          "end_subscribe": {
+            "format": "date-time",
+            "type": "string",
+            "description": "Дата окончания подписки"
+          }
+        },
+        "required": [
+          "subscribe_id",
+          "tariff_id",
+          "user_id",
+          "end_subscribe"
+        ]
+      },
+      "SubscribeCreateAdminRequest": {
+        "type": "object",
+        "properties": {
+          "tariff_id": {
+            "type": "number",
+            "example": 1,
+            "description": "ID тарифа"
+          },
+          "user_id": {
+            "type": "number",
+            "example": 1,
+            "description": "ID пользователя"
+          }
+        },
+        "required": [
+          "tariff_id",
+          "user_id"
+        ]
+      },
+      "SubscribeIdResponse": {
+        "type": "object",
+        "properties": {
+          "subscribe_id": {
+            "type": "number",
+            "example": 1,
+            "description": "ID подписки"
+          }
+        },
+        "required": [
+          "subscribe_id"
+        ]
+      },
+      "SubscribeCreateRequest": {
+        "type": "object",
+        "properties": {
+          "tariff_id": {
+            "type": "number",
+            "example": 1,
+            "description": "ID тарифа"
+          }
+        },
+        "required": [
+          "tariff_id"
+        ]
+      },
+      "CommentResponse": {
+        "type": "object",
+        "properties": {
+          "comment_id": {
+            "type": "number",
+            "example": 1,
+            "description": "Id комментария"
+          },
+          "user_id": {
+            "type": "number",
+            "example": 1,
+            "description": "Id пользователя"
+          },
+          "report_id": {
+            "type": "number",
+            "example": 1,
+            "description": "Id отчета"
+          },
+          "text": {
+            "type": "string",
+            "example": "Супер классное место",
+            "description": "Текст комментария"
+          }
+        },
+        "required": [
+          "comment_id",
+          "user_id",
+          "report_id",
+          "text"
+        ]
+      },
+      "CommentPaginateResponse": {
+        "type": "object",
+        "properties": {
+          "comment_id": {
+            "type": "number",
+            "example": 1,
+            "description": "Id комментария"
+          },
+          "user_id": {
+            "type": "number",
+            "example": 1,
+            "description": "Id пользователя"
+          },
+          "report_id": {
+            "type": "number",
+            "example": 1,
+            "description": "Id отчета"
+          },
+          "text": {
+            "type": "string",
+            "example": "Супер классное место",
+            "description": "Текст комментария"
+          },
+          "list": {
+            "description": "Список элементов",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CommentResponse"
+            }
+          }
+        },
+        "required": [
+          "comment_id",
+          "user_id",
+          "report_id",
+          "text",
+          "list"
+        ]
+      },
+      "CommentCreateRequest": {
+        "type": "object",
+        "properties": {
+          "report_id": {
+            "type": "number",
+            "example": 1,
+            "description": "Id отчета"
+          },
+          "text": {
+            "type": "string",
+            "example": "Супер классное место",
+            "description": "Текст комментария"
+          }
+        },
+        "required": [
+          "report_id",
+          "text"
+        ]
+      },
+      "CommentIdResponse": {
+        "type": "object",
+        "properties": {
+          "comment_id": {
+            "type": "number",
+            "example": 1,
+            "description": "Id комментария"
+          }
+        },
+        "required": [
+          "comment_id"
+        ]
+      },
+      "CommentUpdateRequest": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "example": "Супер классное место",
+            "description": "Текст комментария"
+          }
+        },
+        "required": [
+          "text"
+        ]
+      }
+    }
+  }
+}
