@@ -236,6 +236,31 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
       summary: Удалить водоем из списка избранных пользователя
       tags: *ref_0
+  /api/user/change-role:
+    put:
+      operationId: UserController_changeUserRole
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangeRoleRequest'
+      responses:
+        '200':
+          description: Успешнае изменение роли пользователя
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserIdResponse'
+        '400':
+          description: Ошибка запроса
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      summary: Измененить роль пользователя
+      tags: *ref_0
   /api/auth/register:
     post:
       operationId: AuthController_register
@@ -420,6 +445,27 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
       summary: Сброс пароля
+      tags: *ref_1
+  /api/auth/validate-code:
+    post:
+      operationId: AuthController_validateCode
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfirmRequest'
+      responses:
+        '204':
+          description: Успешная проверка кода
+        '400':
+          description: Ошибка запроса
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      summary: Проверка кода
       tags: *ref_1
   /api/auth/admin/register:
     post:
@@ -2017,6 +2063,30 @@ components:
           description: ID водоема в спике избранных
       required:
         - favorite_id
+    ChangeRoleRequest:
+      type: object
+      properties:
+        user_id:
+          type: number
+          example: 1
+          description: ID пользователя
+        role:
+          type: array
+          example:
+            - FP/DEVELOPER
+          description: Роль
+          items:
+            type: string
+            enum:
+              - FP/ADMIN
+              - FP/DEVELOPER
+              - FP/MANAGER
+              - STORE/ADMIN
+              - STORE/MANAGER
+              - USER
+      required:
+        - user_id
+        - role
     RegisterRequest:
       type: object
       properties:
